@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf src/build
+/opt/netronome/p4/bin/nfp4build -o src/build/dataplane.nffw -l starfighter1 -4 src/dataplane.p4 -c src/dataplane.c -I src/include -DPIF_PLUGIN_INIT --no-debug-info
+rm Makefile-nfp4build

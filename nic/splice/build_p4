@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf build
+/opt/netronome/p4/bin/nfp4build -o src/build/splice.nffw -l starfighter1 -4 src/splice.p4 -c src/splice.c -I src/include
+rm Makefile-nfp4build

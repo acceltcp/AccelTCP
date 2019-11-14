@@ -1,0 +1,35 @@
+############### epproxy configuration file ###############
+
+#######################
+# APPLICATION OPTIONS #
+#######################
+
+# proxy to run
+proxy: {
+   # address and port to listen (0.0.0.0 for INADDR_ANY)
+   listen: "0.0.0.0:80",
+
+   # balancing algorithm to use
+   # (any of "roundrobin", "least", "uri", or "single");
+   balance: roundrobin,
+
+   # address and port of a backend server
+   # (there should be a single backend server for "single" mode)
+   backend: [
+      [name: "s1", addr: "10.0.0.1:80", weight: 1],
+      [name: "s2", addr: "10.0.0.2:80", weight: 1],
+      [name: "s3", addr: "10.0.0.3:80", weight: 1],
+      [name: "s4", addr: "10.0.0.4:80", weight: 1],
+      [name: "s5", addr: "10.0.0.5:80", weight: 1]
+   ],
+
+   # number of pre-established connections per backend server
+   # (e.g., 128 conns/backend server * 2 backend servers = total 256 conns)
+   conn_pool: 0,
+   
+   # method to maintain session persistence 
+   # (any of "none", "set-cookie", "append-cookie", "learn-cookie")
+   # persist: set-cookie    SERVERID,
+   # persist: append-cookie JSESSIONID,
+   # persist: learn-cookie  ASP.NET_SessionId,
+}

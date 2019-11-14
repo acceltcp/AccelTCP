@@ -1,0 +1,3 @@
+#!/bin/sh
+/opt/netronome/p4/bin/rtecli -n -p 20206 design-load -f src/build/dataplane.nffw -p src/build/pif_design.json -c config/default.p4cfg
+#/opt/netronome/p4/bin/rtecli -n -p 20207 design-load -f src/build/dataplane.nffw -p src/build/pif_design.json -c config/default.p4cfg

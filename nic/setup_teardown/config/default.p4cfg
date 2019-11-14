@@ -1,0 +1,25 @@
+{
+    "tables": {
+        "fwd_tbl": {
+            "rules": [
+                {
+                    "action": {
+                        "type": "from_wire"
+                    }, 
+                    "name": "from_wire", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "p0"
+                        }
+                    }
+                }
+            ], 
+            "default_rule": {
+                "action": {
+                    "type": "from_host"
+                }, 
+                "name": "from_host"
+            }
+        }
+    }
+}

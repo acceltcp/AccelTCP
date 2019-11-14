@@ -1,0 +1,47 @@
+{
+    "tables": {
+        "fwd_tbl": {
+            "rules": [
+                {
+                    "action": {
+                        "type": "fwd_to_host"
+                    }, 
+                    "name": "from_nic_0", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "p0"
+                        }
+                    }
+                },
+				{
+                    "action": {
+                        "type": "fwd_to_host"
+                    }, 
+                    "name": "from_nic_1", 
+                    "match": {
+                        "standard_metadata.ingress_port": {
+                            "value": "p4"
+                        }
+                    }
+                },
+				{
+                    "action": {
+                        "type": "strip_and_fwd_to_network"
+                    }, 
+                    "name": "from_host_offload", 
+                    "match": {
+						"offload": {
+							"value": "valid"
+						}
+                    }
+                }				
+            ],
+            "default_rule": {
+                "action": {
+                    "type": "fwd_to_network"
+                }, 
+                "name": "from_host"
+            }
+        }
+    }
+}

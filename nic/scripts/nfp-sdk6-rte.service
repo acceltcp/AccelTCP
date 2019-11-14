@@ -1,0 +1,25 @@
+[Unit]
+Description=Netronome SDK6 Run Time Environment NORMAL MODE
+After=network.target
+
+[Service]
+Environment=CTL_SCRIPT=/opt/nfp_pif/scripts/pif_ctl_nfd.sh
+#To load RTE at startup set FW_FILE, DESIGN_FILE and CFG_FILE and set in ExecStart
+#Environment=FW_FILE=<path_to_firmware_file>
+#Environment=DESIGN_FILE=<path_to_p4_design_file>
+#Environemnt=CFG_FILE=<path_to_configuration_file>
+Environment=LOAD_NETDEV=1
+Environment=NUM_VFS=4
+#For custom DMA and MAC setting set NBI_DMA8_JSON and NBI_MAC8_JSON and set DETECT_MAC=no
+#Environment=NBI_DMA8_JSON=/opt/nfp_pif/etc/configs/platform_dma8_config.json
+#Environment=NBI_MAC8_JSON=/opt/nfp_pif/etc/configs/platform_mac8_config.json
+#Environment=NBI_TM_JSON=nfp_nbi_tm_12x10GE.json
+Environment=NFPSHUTILS=/opt/nfp_pif/scripts/shared/nfp-shutils
+Environment=DISABLE_NFD=no
+Environment=DETECT_MAC=yes
+Environment=LD_LIBRARY_PATH=/opt/netronome/lib:/opt/nfp_pif/lib:$LD_LIBRARY_PATH
+ExecStart=/opt/nfp_pif/bin/pif_rte -n 0 -p 20206 -I -s $CTL_SCRIPT --log_file /var/log/nfp-sdk6-rte.log
+#ExecStart=/opt/nfp_pif/bin/pif_rte -n 0 -p 20206 -I -z -s $CTL_SCRIPT -f $FW_FILE -d $DESIGN_FILE -c $CFG_FILE --log_file /var/log/nfp-sdk6-rte.log
+
+[Install]
+WantedBy=multi-user.target

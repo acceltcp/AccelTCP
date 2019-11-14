@@ -1,0 +1,55 @@
+TARGET = src/epproxy
+
+######################################################################
+# GCC and compilation options
+######################################################################
+GCC = $(CC)
+GCC_OPT = -m64 -Wall -Werror -fgnu89-inline
+GCC_OPT += -DNDEBUG -O3 -g -DNETSTAT -DINFO -DDBGERR -DDBGCERR
+#GCC_OPT += $(DBG_OPT) 
+GCC_OPT += -DENABLE_UCTX
+ifeq ($V,) # no echo
+    export MSG=@echo
+    export HIDE=@
+else
+    export MSG=@\#
+    export HIDE=
+endif
+
+######################################################################
+# LIBRARIES AND INCLUDES
+######################################################################
+MTCP_FLD    = ../../mtcp
+MTCP_INC    =-I$(MTCP_FLD)/include
+MTCP_TARGET = $(MTCP_FLD)/lib/libmtcp.a
+YAML_FLD    = lib/yaml-0.1.7
+YAML_INC    =-I$(YAML_FLD)/include
+YAML_TARGET = $(YAML_FLD)/libyaml.a
+LIBS        += -lmtcp -lnuma -lpthread -lrt # -lssl -lcrypto
+LIB_DIR     += -L$(MTCP_FLD)/lib
+#CMN_DIR     = ../common
+#CMN_INC     = -I$(CMN_DIR)
+#UTIL_INC    = -I../../util/include
+
+DPDK_LIB=@DPDKLIBPATH@/lib/
+DPDK_LIB_FLAGS = $(shell cat @DPDKLIBPATH@/lib/ldflags.txt)
+LIBS    += -m64 -g -pthread -lrt -march=native -Wl,-export-dynamic \
+		-Wl,-lnuma  \
+		-Wl,-lmtcp -Wl,-lpthread -Wl,-lrt -Wl,-ldl ${DPDK_LIB_FLAGS}
+######################################################################
+#-L../..//dpdk/lib
+
+default: $(TARGET)
+
+$(MTCP_TARGET):
+	cd $(MTCP_FLD)/src && make	
+
+$(TARGET): $(MTCP_TARGET) $(TARGET).c src/*.c $(YAML_TARGET) #$(CMN_DIR)/*.c
+	$(MSG) "   CC $<"
+	$(HIDE) $(GCC) $(GCC_OPT) -o $@ $^ $(MTCP_INC) $(YAML_INC) $(LIB_DIR) $(LIBS)
+	mv $@ .
+
+clean:
+	rm -rf *~ *.o ./epproxy logs/*
+	cd $(MTCP_FLD)/src && make clean
+

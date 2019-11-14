@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/netronome/p4/bin/rtecli -n design-load -f src/build/splice.nffw -p src/build/pif_design.json -c config/default.p4cfg
