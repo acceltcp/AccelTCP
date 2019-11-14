@@ -94,6 +94,7 @@ __Note:__ You should omit `--enable-nfp` when you run AccelTCP on a system with 
 #### 2-1. Run a TCP echo server with setup and teardown offload
 
 ```bash
+./load_nic.sh --server
 cd apps/examples/
 sudo ./msg_server -c <num_cores> --nic-offload
 ```
@@ -101,6 +102,7 @@ sudo ./msg_server -c <num_cores> --nic-offload
 #### 2-2. Run a Layer-7 load balancer with splicing offload
 
 ```bash
+./load_nic.sh --proxy
 cd apps/epproxy
 ./lib/install_yaml.sh
 make
