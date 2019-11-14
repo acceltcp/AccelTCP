@@ -72,9 +72,9 @@ sudo ./init_nic.sh
 sudo systemctl start nfp-sdk6-rte
 sudo systemctl status nfp-sdk6-rte
 ● nfp-sdk6-rte.service - Netronome SDK6 Run Time Environment NORMAL MODE
-   Loaded: loaded (/lib/systemd/system/nfp-sdk6-rte.service; enabled; vendor preset: enabled)
-      Active: active (running) since Wed 2019-11-13 22:56:23 KST; 2min 44s ago
-	  ```
+Loaded: loaded (/lib/systemd/system/nfp-sdk6-rte.service; enabled; vendor preset: enabled)
+Active: active (running) since Wed 2019-11-13 22:56:23 KST; 2min 44s ago
+```
 
 You can run `sudo systemctl enable nfp-sdk6-rte` to start NFP SDK RTE server automatically on reboot.
 
