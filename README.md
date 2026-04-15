@@ -2,7 +2,7 @@
 
 AccelTCP is a user-level TCP stack that harnesses programmable network interface cards (or NICs) as a TCP protocol accelerator. AccelTCP can offload stateful TCP operations such as connection setup and teardown as well as connection splicing that relays packets between two connections entirely on NIC. AccelTCP aims to extend the benefit of traditional NIC offloads such as TSO or LRO to short-lived connections and application-level proxying.
 
-Please refer to [our project page](https://tnet.snu.ac.kr/acceltcp/) to find out more details.
+Please refer to [our paper](https://www.usenix.org/conference/nsdi20/presentation/moon) and [our project page](https://tnet.snu.ac.kr/acceltcp/) to find out more details.
 
 ## System Requirements
 
